@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      body {
+        margin: 0;
+        font-family: Arial, sans-serif;
+      }
+
+      header {
+        position: fixed;
+        top: 0;
+        width: 100%;
+        background-color: #ff0000;
+        padding: 10px 0;
+        text-align: center;
+        transition: background-color 0.3s;
+      }
+
+      nav {
+        display: flex;
+        justify-content: center;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+      }
+
+      nav a {
+        text-decoration: none;
+        color: black;
+        padding: 10px 20px;
+        margin: 0 10px;
+        border-radius: 5px;
+        transition: background-color 0.3s, color 0.3s;
+      }
+
+      nav a:hover {
+        background-color: #555;
+        color: #fff;
+      }
+
+      section {
+        height: 1000px; /* Just for demonstration purposes */
+        margin-top: 60px; /* Space for the fixed header */
+      }
+    </style>
+</head>
+<body>
+
+<header>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">About</a>
+        <a href="#services">Services</a>
+        <a href="#contact">Contact</a>
+    </nav>
+</header>
+
+<section id="home">
+    <h1>Home Section</h1>
+</section>
+
+<section id="about">
+    <h1>About Section</h1>
+</section>
+
+<section id="services">
+    <h1>Services Section</h1>
+</section>
+
+<section id="contact">
+    <h1>Contact Section</h1>
+</section>
+
+<script>
+    const header = document.querySelector('header');
+    const sections = document.querySelectorAll('section');
+
+    const sectionColors = {
+        home: '#ff0000',
+        about: '#ff00dd',
+        services: '#ea00ff',
+        contact: '#ff6666'
+    };
+
+    window.addEventListener('scroll', () => {
+        const scrollPosition = window.scrollY;
+
+        sections.forEach(section => {
+            const sectionId = section.id;
+            const sectionPosition = section.offsetTop;
+            
+            if (scrollPosition > 0 && scrollPosition >= sectionPosition) {
+                header.style.backgroundColor = sectionColors[sectionId];
+            }
+        });
+
+        // Reset header color if not in any section
+        if (scrollPosition <= 0) {
+            header.style.backgroundColor = '#0099ff'; // Default color for the top
+        }
+    });
+
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+
+          document.querySelector(this.getAttribute("href")).scrollIntoView({
+            behavior: "smooth",
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
